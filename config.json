@@ -1,0 +1,97 @@
+{
+    "TOKEN": "BOT_TOKEN",
+    "GUILD_ID": "DISCORD_SERVER_ID",
+    "NAME": "INFRARED",
+    "API_URL": "INFRARED_API_URL",
+    "MCSRVSTATUS_URL": "https://api.mcsrvstat.us/2/",
+    "ICON_URL": "https://api.mcsrvstat.us/icon/",
+    "STATUS_IMG_URL": "http://status.mclive.eu/Infrared/",
+    "DB": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "test"
+    },
+    "PROXY_IPS": ["YOUR_PROXYS_IP_HERE"],
+    "commands": {
+        "proxylist": {
+            "name": "proxy-list",
+            "description": "This method will return a list of Infrared's proxies",
+            "select-menu": "Proxy"
+        },
+        "bot": {
+            "name": "bot",
+            "description": "This command manages the bot permissions",
+            "subcommands": {
+                "add": {
+                    "name": "add",
+                    "description": "This command will add a new user to the bot permissions list",
+                    "discord": "discord",
+                    "rank": "rank"
+                },
+                "remove": {
+                    "name": "remove",
+                    "description": "This command will remove the user from the bot permissions list",
+                    "discord": "discord"
+                }
+            }
+        },
+        "serverinfo": {
+            "name": "server-info",
+            "description": "This method will return an embed with the description of the given server IP address",
+            "ip": "IP of the server you want the information"
+        }
+    },
+    "error": {
+        "PROTOCOL_CONNECTION_LOST": "Database connection closed",
+        "ER_CON_COUNT_ERROR": "Too many connections",
+        "ECONNREFUSED": "Connection refused with database",
+        "command_error_reply": "There was an error while trying to execute this command",
+        "API_error": "There was an error with the API",
+        "DB_error": "There was an error with the database",
+        "reaction_error": "You can not react to this message",
+        "hasPerms": "The user already has permission",
+        "noPermission": "You don't have permission to execute this command",
+        "correct_usage": "Please fill al the arguments",
+        "no_user": "The user does not exists in the database"
+    },
+    "embeds": {
+        "footer": {
+            "iconUrl": "",
+            "text": "Infrared Bot"
+        },
+        "proxy-list": {
+            "color": "#000",
+            "fields": {
+                "domainNames": "Domain names"
+            }
+        },
+        "bot": {
+            "add": {
+                "color": "#000",
+                "title": "User added",
+                "description": "This user has now permission to use the bot"
+            },
+            "remove": {
+                "color": "#000",
+                "title": "User removed",
+                "description": "This user was removed from the bot permissions list"
+            }
+        },
+        "serverinfo": {
+            "title": "Infrared Server Status",
+            "color": "#000",
+            "offline_thumbnail": "https://static.wikia.nocookie.net/minecraft_gamepedia/images/9/9e/Barrier_%28held%29_JE2_BE2.png/revision/latest?cb=20200224220440",
+            "server": "Server",
+            "ip": "IP",
+            "port": "Port",
+            "version": "Version",
+            "online": "Players",
+            "protected": {
+                "name": "Protected",
+                "yes": "yes",
+                "no": "no"
+            }
+        }
+    }
+}
