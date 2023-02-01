@@ -4,7 +4,6 @@ const config = require('../config.json');
 const ExtraFunctions = require('../classes/ExtraFunctions.js');
 const Bot = require("../classes/Bot");
 
-console.log("\u001b[32m", "[✔] Loaded Bot Permissions command", "\u001b[0m");
 
 module.exports = {
     data: new SlashCommandBuilder()

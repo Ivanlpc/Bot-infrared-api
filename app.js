@@ -6,10 +6,12 @@ const { Routes } = require('discord-api-types/v9');
 
 const { Client, Intents, Collection } = require('discord.js');
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const eventsFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
+
 const config = require("./config.json");
 
 // Crea el objeto cliente
-const client = new Client({
+module.exports = client = new Client({
     intents: [Intents.FLAGS.GUILDS]
 });
 const commands = [];
@@ -20,46 +22,19 @@ const TEST_GUILD_ID = config.GUILD_ID
 // Crear una colección de comandos 
 client.commands = new Collection();
 
-for (const file of commandFiles) {
+for (const file of eventsFiles) {
+	let { event } = require(`./events/${file}`);
+	console.log("\u001b[32m", `[✔] Loaded  Event`, "\u001b[0m")
+}
 
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     commands.push(command.data.toJSON());
     client.commands.set(command.data.name, command);
+console.log("\u001b[32m", `[✔] Loaded ${command.data.name} command`, "\u001b[0m");
+
 }
 
-client.once('ready', () => {
 
-    const CLIENT_ID = client.user.id;
-    const rest = new REST({
-        version: '9'
-    }).setToken(config.TOKEN);
-    (async () => {
-        try {
-            await rest.put(
-                Routes.applicationGuildCommands(CLIENT_ID, TEST_GUILD_ID), {
-                body: commands
-            },
-            );
-
-            console.log('All commands has been registered');
-
-        } catch (error) {
-            if (error) console.error(error);
-        }
-    })();
-    console.log(`Logged as ${client.user.tag}`);
-});
-
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
-    const command = client.commands.get(interaction.commandName);
-    if (!command) return;
-    try {
-        await command.execute(interaction, client);
-    } catch (error) {
-        if (error) console.error(error);
-        await interaction.reply({ content: config.error.command_error_reply, ephemeral: true });
-    }
-});
 
 client.login(config.TOKEN)
